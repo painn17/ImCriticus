@@ -1,8 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/navigation";
-import Link from "next/link";
-
+import { signInWithToken } from "./utils/firebase/firebaseAuth";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,8 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="w-full mx-auto container">
+      <body className="w-full mx-auto container py-4">
         <Navigation />
+
         {children}
       </body>
     </html>

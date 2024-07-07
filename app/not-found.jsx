@@ -4,7 +4,7 @@ function NotFound() {
     <div className="">
       <div className="text-red-500 text-center text-4xl">Not Found</div>
       <div className="w-fit mx-auto">
-        <LinkTo href={"/home"} text={"Return to home Page"} />
+        <LinkTo href={"/home"}>Return to home Page</LinkTo>
       </div>
     </div>
   );
