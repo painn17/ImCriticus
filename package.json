@@ -9,18 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.7",
     "axios": "^1.7.2",
+    "child_process": "^1.0.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "firebase": "^10.12.2",
     "firebaseui": "^6.1.0",
     "next": "^14.2.4",
+    "oracledb": "^6.5.1",
+    "pg-query-stream": "^4.6.0",
+    "qs": "^6.12.3",
     "react": "^18.3.1",
+    "react-custom-alert": "^1.0.4",
     "react-dom": "^18.3.1",
-    "react-loader-spinner": "^6.1.6"
+    "react-loader-spinner": "^6.1.6",
+    "react-multi-carousel": "^2.8.5",
+    "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "strapi": "^3.6.11",
+    "strapi-plugin-import-export-content": "^0.4.2"
   },
   "devDependencies": {
     "postcss": "^8",
+    "postcss-import": "^16.1.0",
     "tailwindcss": "^3.4.1"
   }
 }

@@ -1,27 +1,43 @@
 import React from "react";
-import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 import Button from "./ui/button";
-import { authOut, monitorAuthState } from "../utils/firebase/firebaseAuth";
-function User({ setModalVisible, setIslogged, isLogged, userData }) {
-  async function logout() {
-    authOut();
-    monitorAuthState(setIslogged);
-  }
+import UserImage from "./ui/userImage";
+import { ArrowRightIcon } from "./ui/icons/icons";
+import LinkTo from "./ui/link";
+import Loader from "./ui/loader";
+function User() {
+  const { setIsLogged, isLogged, setUserData, userData } = useAuth();
+  const router = useRouter();
+
   return (
-    <div className="p-2 m-2 rounded">
-      {isLogged ? (
-        <div className="flex items-center gap-2">
-          <div>{userData}</div>
-          <Button callback={logout} mood={true}>
-            Logout
-          </Button>
-        </div>
-      ) : (
-        <Button callback={() => setModalVisible(true)} mood={false}>
-          Login
-        </Button>
-      )}
-    </div>
+    <LinkTo href={`/user/${userData?.id}`}>
+      <div className="p-2 m-2 rounded">
+        {userData ? (
+          isLogged ? (
+            <div className="flex items-center gap-2 max-lg:flex-col">
+              <div className="w-14 h-14 items-center flex">
+                <UserImage
+                  openModal={false}
+                  url={userData?.user_picture?.url}
+                ></UserImage>
+              </div>
+              <div>
+                <div>
+                  <div>
+                    <h1 className="text-gray-50">{userData?.username}</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )
+        ) : (
+          <Loader loading={true}></Loader>
+        )}
+      </div>
+    </LinkTo>
   );
 }
 

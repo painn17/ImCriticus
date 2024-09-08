@@ -1,0 +1,107 @@
+{
+  "kind": "collectionType",
+  "collectionName": "getanime",
+  "info": {
+    "singularName": "anime",
+    "pluralName": "getanime",
+    "displayName": "Anime",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "score": {
+      "type": "decimal"
+    },
+    "episodes": {
+      "type": "integer"
+    },
+    "release_date": {
+      "type": "date"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "image_landscape": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "label": {
+      "type": "string"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "anime"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Released",
+        "Ongoing"
+      ]
+    },
+    "genre": {
+      "type": "customField",
+      "options": [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Crime",
+        "Documentary",
+        "Drama",
+        "Fantasy",
+        "Horror",
+        "Mystery",
+        "Romance",
+        "Sci-Fi",
+        "Sport",
+        "Thriller",
+        "Family",
+        "Isekai",
+        "Superhero",
+        "Slice of Life"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "Tv",
+        "Movie"
+      ]
+    },
+    "illustrations": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

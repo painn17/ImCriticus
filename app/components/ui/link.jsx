@@ -3,7 +3,7 @@ import Link from "next/link";
 function LinkTo({ href, children }) {
   return (
     <Link href={href}>
-      <div className="p-2 m-2 text-center rounded bg-blue-300 text-black">
+      <div className="link-small text-gray-200 flex flex-row gap-1 hover:scale-105 hover:text-green-200 transition ease-linear duration-200">
         {children}
       </div>
     </Link>

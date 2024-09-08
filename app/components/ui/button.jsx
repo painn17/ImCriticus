@@ -1,13 +1,31 @@
 import React from "react";
-function Button({ children, callback, mood, ...props }) {
+function CustomButton({
+  children,
+  callback,
+  buttonstyle = true,
+  isClickable,
+  height = "h-fit",
+  width,
+  ...props
+}) {
   return (
-    <button
-      onClick={callback}
-      className={mood ? "p-1 bg-red-400 rounded" : "p-1 bg-green-400 rounded"}
+    <div
+      className={
+        (buttonstyle
+          ? `primary-bg px-8  rounded-xl text-gray-50 `
+          : isClickable
+          ? "success-text  link-regular "
+          : "primary-text  link-regular ") +
+        " gap-2 flex  transition duration-200 hover:scale-105" +
+        (height ? `  h-${height} ` : "") +
+        (width ? ` w-${width}` : " w-full ")
+      }
     >
-      {children}
-    </button>
+      <button className="link-regular flex-grow" onClick={callback}>
+        <div className=" gap-2">{children}</div>
+      </button>
+    </div>
   );
 }
 
-export default Button;
+export default CustomButton;

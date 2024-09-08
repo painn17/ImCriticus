@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_component_sliders",
+  "info": {
+    "displayName": "slider"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

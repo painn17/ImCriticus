@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "suggestions",
+  "info": {
+    "singularName": "suggestion",
+    "pluralName": "suggestions",
+    "displayName": "suggestion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "suggested_anime": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::anime.anime"
+    },
+    "suggest_message": {
+      "type": "text",
+      "required": false,
+      "minLength": 10,
+      "maxLength": 120
+    },
+    "proposed_by": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "my_suggestions"
+    },
+    "proposed_to": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "suggestions_to_me"
+    },
+    "isWatched": {
+      "type": "boolean"
+    },
+    "isAccepted": {
+      "type": "boolean"
+    }
+  }
+}

@@ -2,13 +2,17 @@ import { useState } from "react";
 import Button from "./ui/button";
 import { Blocks } from "react-loader-spinner";
 import {
-  authWithEmailPassword,
+  registerWithEmailPassword,
   loginWithEmailPassword,
-  monitorAuthState,
-} from "../utils/firebase/firebaseAuth";
+  // monitorAuthState,
+} from "../services/strapi/strapiAuth";
 
 function Form({ buttonText, ...props }) {
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
   const [formError, setFormError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (event) => {
@@ -21,7 +25,8 @@ function Form({ buttonText, ...props }) {
 
   function sendUserData(email) {
     props.setUserData(email);
-    monitorAuthState(props.setIslogged);
+    props.setIslogged(true);
+    // monitorAuthState(props.setIslogged);
   }
 
   // async function login() {
@@ -49,30 +54,41 @@ function Form({ buttonText, ...props }) {
   // }
 
   async function authentificate(typeOfAuth) {
-    setIsLoading(true);
-    if (loginData.email.length < 1 || loginData.password.length < 1) {
+    console.log(
+      props.signinModalVisible,
+      props.loginModalVisible,
+      typeOfAuth,
+      loginData
+    );
+    if (
+      props.signinModalVisible === true &&
+      (loginData.email.length < 1 ||
+        loginData.password.length < 1 ||
+        loginData.username.length < 1)
+    ) {
       setFormError("Some of the fields are filled in incorrectly");
     } else {
+      setIsLoading(true);
       let data;
       if (typeOfAuth == "login") {
-        data = await loginWithEmailPassword(
-          loginData.email,
-          loginData.password
-        );
+        data = await loginWithEmailPassword(loginData);
       } else if (typeOfAuth == "register") {
-        data = await authWithEmailPassword(loginData.email, loginData.password);
+        data = await registerWithEmailPassword(loginData);
       }
       if (data) {
         setIsLoading(false);
       }
-      if (data.Data.code) {
-        console.log(data.Data);
-        setFormError(data.Data.code.replace("auth/", "").replaceAll("-", " "));
+      if (data.data) {
+        console.log(data);
+        setFormError(data.statusText);
         return 0;
-      } else if (!data.Data.code) {
-        console.log(data.Data);
-        sendUserData(loginData.email);
-        props.setModalVisible(false);
+      } else if (!data.data) {
+        sendUserData(data.user.username);
+        if (props.setsigninModalVisible) {
+          props.setsigninModalVisible(false);
+        } else {
+          props.setloginModalVisible(false);
+        }
         console.log("Authentificated");
       }
 
@@ -81,6 +97,21 @@ function Form({ buttonText, ...props }) {
   }
   return (
     <div className="flex flex-col w-full gap-2">
+      {props.signinModalVisible ? (
+        <div className="flex flex-row items-center text-black justify-between">
+          <p>Username:</p>
+          <input
+            className="m-1 p-4 text-black border border-slate-500 rounded"
+            type={"username"}
+            placeholder="Example_123"
+            value={loginData.username}
+            name="username"
+            onChange={handleInputChange}
+          ></input>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="flex flex-row items-center text-black justify-between">
         <p>Email:</p>
         <input
@@ -124,9 +155,12 @@ function Form({ buttonText, ...props }) {
           />
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
-          <Button callback={() => authentificate("login")}>Login</Button>
-          <Button callback={() => authentificate("register")}>SignUp</Button>
+        <div className="flex flex-col gap-3 text-xl">
+          {props.loginModalVisible ? (
+            <Button callback={() => authentificate("login")}>Login</Button>
+          ) : (
+            <Button callback={() => authentificate("register")}>SignUp</Button>
+          )}
         </div>
       )}
     </div>

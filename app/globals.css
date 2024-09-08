@@ -3,31 +3,142 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    background-color: var(--bg-dark);
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  :root {
+    --primary: theme("colors.violet.500");
+    --secondary: theme("colors.blue.500");
+    --success: theme("colors.green.500");
+    --error: theme("colors.red.500");
+    --tertary: theme("colors.purple.500");
+    --warning: theme("colors.amber.500");
+    --bg-dark: theme("colors.gray.900");
+    /* --bg-blur: theme("backgroundImage.bg-blur"); */
+  }
+  .heading-one {
+    @apply font-semibold text-[64px]/[80px] tracking-wider;
+  }
+  .heading-two {
+    @apply font-semibold text-5xl/[56px] tracking-wider;
+  }
+  .heading-three {
+    @apply font-semibold text-[32px]/[40px] tracking-tighter;
+  }
+  .heading-four {
+    @apply font-semibold text-2xl tracking-tighter;
+  }
+  .heading-five {
+    @apply font-bold text-xl/[24px] tracking-tighter;
+  }
+  .heading-six {
+    @apply font-semibold text-base tracking-tighter;
+  }
+  .body-large {
+    @apply font-normal text-[20px]/[32px];
+  }
+  .body-regular {
+    @apply font-normal text-base;
+  }
+  .body-small {
+    @apply font-normal text-sm/[24px];
+  }
+  .body-extra-small {
+    @apply font-normal text-xs/[24px];
+  }
+  .caption {
+    @apply font-bold text-sm/[16px];
+  }
+  .overline-regular {
+    @apply font-bold text-sm/[24px] tracking-wider;
+  }
+  .overline-small {
+    @apply font-bold text-xs tracking-wider;
+  }
+  .link-regular {
+    @apply font-semibold text-base tracking-wider;
+  }
+  .link-small {
+    @apply font-semibold text-[14px]/[24px] tracking-wider;
+  }
+  .link-extra-small {
+    @apply font-semibold text-xs tracking-wider;
+  }
+  .primary-bg {
+    @apply bg-[--primary];
+  }
+  .primary-bg {
+    @apply bg-[var(--primary)];
+  }
+
+  .primary-text {
+    @apply text-[var(--primary)];
+  }
+
+  .secondary-bg {
+    @apply bg-[var(--secondary)];
+  }
+
+  .secondary-text {
+    @apply text-[var(--secondary)];
+  }
+
+  .success-bg {
+    @apply bg-[var(--success)];
+  }
+
+  .success-text {
+    @apply text-[var(--success)];
+  }
+
+  .error-bg {
+    @apply bg-[var(--error)];
+  }
+
+  .error-text {
+    @apply text-[var(--error)];
+  }
+
+  .tertary-bg {
+    @apply bg-[var(--tertary)];
+  }
+
+  .tertary-text {
+    @apply text-[var(--tertary)];
+  }
+
+  .warning-bg {
+    @apply bg-[var(--warning)];
+  }
+
+  .warning-text {
+    @apply text-[var(--warning)];
+  }
+
+  .bg-dark-bg {
+    @apply bg-[var(--bg-dark)];
+  }
+  .favorite:hover > .favorite-1 {
+    @apply hidden;
+  }
+  .favorite:hover > .favorite-2 {
+    @apply flex;
+  }
+
+  .bg-blur {
+    background-position: 50% 85%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: blur(1000px);
+    background-image: url("http://localhost:1337/uploads/Background_6d050c2889.png");
   }
 }
